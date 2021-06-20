@@ -1,23 +1,20 @@
-import logo from './logo.svg';
+import { useState } from 'react';
 import './App.css';
+import MineField from './components/MineField';
 
 function App() {
+  const [option, setOption] = useState('step')
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <MineField option={option}/>
+      <button 
+        className={`w3-button w3-border w3-jumbo ${option == 'step' ?'w3-grey':'' }`}
+        onClick={()=>setOption('step')}
+      >Step</button>
+      <button 
+        className={`w3-button w3-border w3-jumbo ${option == 'flag' ?'w3-grey':'' }`}
+        onClick={()=>setOption('flag')}
+      >Flag</button>
     </div>
   );
 }
