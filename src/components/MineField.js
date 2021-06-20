@@ -1,9 +1,30 @@
 import React, { useState, useEffect } from 'react';
 import Cell from './Cell';
 
-export default function MineField({ option }) {
+export default function MineField({ option, gameStatus, setGameStatus }) {
+    const boxObject = {
+        minesNearby: 0,
+        mineExist: false,
+        stepped: false,
+        flagged: false
+    }
+
+    const [mineFieldArray, setMineFieldArray] = useState(new Array(7).fill(new Array(7).fill(boxObject)));
+    const [minePosArray, setMinePosArray] = useState([]);
+    const [numOfStepped, setNumOfStepped] = useState(0);
+
     const getRandomCombination = () => {
         return Math.floor(Math.random() * 7)
+    }
+
+    const createMinePosArray = () => {
+        let minePosArray = [];
+        for (let i = 0; i < 5; i++) {
+            const minePos = [getRandomCombination(), getRandomCombination()];
+            minePosArray.push(minePos)
+        }
+        minePosArray = [...new Set(minePosArray)];
+        return minePosArray;
     }
 
     const getNeighbours = (x, y) => {
@@ -40,45 +61,17 @@ export default function MineField({ option }) {
         }
     }
 
-    const boxObject = {
-        minesNearby: 0,
-        mineExist: false,
-        stepped: false,
-        flagged: false
-    }
-
-    const [mineFieldArray, setMineFieldArray] = useState(new Array(7).fill(new Array(7).fill(boxObject)));
-    const [nullGroups, setNullGroups] = useState([]);
-
-    let minePosArray = [];
-    for (let i = 0; i < 5; i++) {
-        const minePos = [getRandomCombination(), getRandomCombination()];
-        minePosArray.push(minePos)
-    }
-    minePosArray = [...new Set(minePosArray)];
-    let array = mineFieldArray;
-    let mineNeighbourArray = [];
-
-    useEffect(() => {
-        minePosArray.map((minePos) => {
-            array = insertElement('mine', array, ...minePos)
-            setMineFieldArray(array);
-            mineNeighbourArray.push(...getNeighbours(...minePos))
-        })
-        mineNeighbourArray.map((pos) => {
-            array = insertElement('mines-nearby', array, ...pos);
-            setMineFieldArray(array);
-        })
-    }, [])
-
     const handleClick = (x, y) => {
         option == 'step' && setMineFieldArray(stepOnBox(x, y))
         option == 'flag' && setMineFieldArray(flagBox(x, y))
     }
 
     const stepOnBox = (x, y) => {
-        
-        if (mineFieldArray[x][y].flagged && array[x][y].stepped == false) return array;
+        if (mineFieldArray[x][y].flagged || mineFieldArray[x][y].stepped == true) return mineFieldArray;
+        if (mineFieldArray[x][y].mineExist) {
+            setGameStatus('game-over-lost');
+
+        }
         let arrayToStep = [];
         arrayToStep.push([x, y])
         if (mineFieldArray[x][y].minesNearby == 0) {
@@ -86,7 +79,37 @@ export default function MineField({ option }) {
                 arrayToStep.push(pos)
             )
         }
+        let array = mineFieldArray;
+        let n = numOfStepped;
         arrayToStep.map((pos) => {
+            let existingBox = mineFieldArray[pos[0]][pos[1]];
+            if (!existingBox.flagged && !existingBox.stepped) {
+                array = [
+                    ...array.slice(0, pos[0]),
+                    [...array[pos[0]].slice(0, pos[1]), { ...existingBox, stepped: true }, ...array[pos[0]].slice(pos[1] + 1)],
+                    ...array.slice(pos[0] + 1)
+                ];
+                n++
+            }
+        })
+        setNumOfStepped(n);
+        return array
+    }
+
+    const flagBox = (x, y) => {
+        let existingBox = mineFieldArray[x][y];
+        let flagStatus = mineFieldArray[x][y].flagged;
+        if (mineFieldArray[x][y].stepped) return mineFieldArray
+        return [
+            ...mineFieldArray.slice(0, x),
+            [...mineFieldArray[x].slice(0, y), { ...existingBox, flagged: !flagStatus }, ...mineFieldArray[x].slice(y + 1)],
+            ...mineFieldArray.slice(x + 1)
+        ]
+    }
+
+    const handleGameOver = () => {
+        let array = mineFieldArray
+        minePosArray.map((pos)=>{
             let existingBox = mineFieldArray[pos[0]][pos[1]];
             array = [
                 ...array.slice(0, pos[0]),
@@ -94,23 +117,36 @@ export default function MineField({ option }) {
                 ...array.slice(pos[0] + 1)
             ]
         })
-
-        return array
+        setMineFieldArray(array);
     }
 
-    const flagBox = (x, y) => {
-        let existingBox = mineFieldArray[x][y];
-        let flagStatus = mineFieldArray[x][y].flagged;
-        if (mineFieldArray[x][y].stepped) return array
-        return [
-            ...array.slice(0, x),
-            [...array[x].slice(0, y), { ...existingBox, flagged: !flagStatus }, ...array[x].slice(y + 1)],
-            ...array.slice(x + 1)
-        ]
-    }
+    useEffect(() => {
+        let array = mineFieldArray;
+        let neighbourArray = [];
+        const minePosArray = createMinePosArray()
+        minePosArray.map((minePos) => {
+            array = insertElement('mine', array, ...minePos)
+            neighbourArray.push(...getNeighbours(...minePos))
+        })
+        neighbourArray.map((pos) => {
+            array = insertElement('mines-nearby', array, ...pos);
+        })
+        setMineFieldArray(array);
+        setMinePosArray(minePosArray)
+    }, [1])
+
+    useEffect(()=>{
+        if(gameStatus=='game-over-lost'){
+            handleGameOver()
+        }
+        console.log(numOfStepped,49-minePosArray.length)
+        if(numOfStepped==(49-minePosArray.length)){
+            setGameStatus('game-over-won')
+        }
+    },[gameStatus,numOfStepped])
 
     return (
-        <div>
+        <div style={{pointerEvents:`${gameStatus!='started'?'none':null}`}}>
             {
                 mineFieldArray.map(
                     (mineFieldArrayRow, i) =>

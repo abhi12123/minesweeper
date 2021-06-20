@@ -1,20 +1,18 @@
-import { useState } from 'react';
+
 import './App.css';
-import MineField from './components/MineField';
+import GamePage from './components/GamePage';
+import HomePage from './components/HomePage'
+import { useRoutes } from 'hookrouter';
 
 function App() {
-  const [option, setOption] = useState('step')
+  const routes = {
+    '/': () => <HomePage />,
+    '/game-page': () => <GamePage />
+  };
+  const routeResult = useRoutes(routes);
   return (
     <div className="App">
-      <MineField option={option}/>
-      <button 
-        className={`w3-button w3-border w3-jumbo ${option == 'step' ?'w3-grey':'' }`}
-        onClick={()=>setOption('step')}
-      >Step</button>
-      <button 
-        className={`w3-button w3-border w3-jumbo ${option == 'flag' ?'w3-grey':'' }`}
-        onClick={()=>setOption('flag')}
-      >Flag</button>
+      {routeResult}
     </div>
   );
 }
