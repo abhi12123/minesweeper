@@ -5,10 +5,10 @@ import HomePage from './components/HomePage'
 import { useRoutes } from 'hookrouter';
 
 function App() {
-  const routes = {
-    '/': () => <HomePage />,
-    '/game-page': () => <GamePage />
-  };
+  const path = process.env.PUBLIC_URL;
+  const routes = {}
+  routes[`${path}/`] = () => <HomePage />;
+  routes[`${path}/game-page`] = () => <GamePage />
   const routeResult = useRoutes(routes);
   return (
     <div className="App">
