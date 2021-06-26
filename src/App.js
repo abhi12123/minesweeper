@@ -1,5 +1,5 @@
 
-import './App.css';
+import './App.scss';
 import GamePage from './components/GamePage';
 import HomePage from './components/HomePage'
 import { useRoutes } from 'hookrouter';

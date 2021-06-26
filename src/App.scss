@@ -1,0 +1,114 @@
+@import './w3.css';
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
+*{
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Roboto', sans-serif;
+  text-decoration: none;
+}
+
+.cell {
+  width: 9%;
+  padding-top: 8%;
+  position: relative;
+  border-radius: 10px;
+  font-weight: 300%;
+  display: inline-block;
+  .cell-content{
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+  }
+}
+
+.homepage{
+  padding-top: 35vh;
+  div:nth-child(1){
+    font-size: clamp(50px, 10vw, 120px);
+  }
+  a{
+    font-size: clamp(20px, 4vw, 30px);
+    border: black 3px solid;
+    margin: auto;
+    width: fit-content;
+    border-radius: 20px;
+  }
+}
+
+.game-page{
+  margin: clamp(40px, 4vw, 60px);
+  .mine-field{
+    margin-bottom: 5%;
+  }
+  .options{
+    .option{
+      font-size: clamp(20px, 4vw, 40px);
+      margin: auto;
+      width: 90%;
+      margin: 2%;
+      border-radius: 20px;
+      outline: none;
+      border:0px;
+      padding: 10px;
+    }
+    .selected{
+      background-color:  rgb(66, 40, 0);
+      color: white;
+    }
+    .option:hover{
+      background-color: rgba(66, 40, 0, 0.582);
+    }
+  }
+}
+
+.stepped{
+  background-color: rgb(219, 171, 99);
+}
+
+.unstepped{
+  background-color: rgb(66, 40, 0);
+}
+
+.bomb-img{
+  background-image: url('./img/bomb-img.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.flag-img{
+  background-image: url('./img/flag-img.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.popup{
+  background: #ffffffe5;
+  width: 80%;
+  position: absolute;
+  height: clamp(150px, 30vw, 300px);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 3;
+  border-radius: 20px;
+  box-shadow: 1px 1px 10px #0000008a;
+  font-size: clamp(50px, 10vw, 120px);
+  text-align: center;
+  .popup-buttons{
+    font-size: clamp(30px, 4vw, 50px);
+  }
+}
+
+.game-over-won{
+  color: green;
+}
+
+.game-over-lost{
+  color: red;
+}

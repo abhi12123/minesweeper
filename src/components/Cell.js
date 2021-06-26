@@ -5,15 +5,20 @@ export default function Cell({boxContent,handleClick,xPos,yPos}) {
     const cellStyle = () => {
         let style = ''
         if(stepped){
-            style = style.concat(' w3-white')
+            style = style.concat(' stepped')
         }else{
-            style = style.concat(' w3-black')
+            style = style.concat(' unstepped')
+        }
+        
+        return style
+    }
+    const cellContentStyle = () => {
+        let style = ''
+        if(mineExist && stepped){
+            style = style.concat(' bomb-img')
         }
         if(flagged){
-            style = style.concat(' far fa-flag fa-5x')
-        }
-        if(mineExist && stepped){
-            style = style.concat(' fas fa-bomb fa-5x')
+            style = style.concat(' flag-img')
         }
         return style
     }
@@ -23,11 +28,11 @@ export default function Cell({boxContent,handleClick,xPos,yPos}) {
                 cell w3-button w3-border w3-ripple ${cellStyle()}
             `}
             onClick={()=>{handleClick()}}
+            style={stepped?{pointerEvents:'none'}:null}
         >
-            {minesNearby == 0 || !stepped || mineExist ? null : 
-            <span className='w3-xxxlarge'>
-                {minesNearby}
-            </span>}
+            <span className={`cell-content ${cellContentStyle()}`}>
+                {minesNearby== 0 || !stepped || mineExist ? null : minesNearby}
+            </span>
         </div>
     )
 }

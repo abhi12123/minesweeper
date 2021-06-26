@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Cell from './Cell';
 
-export default function MineField({ option, gameStatus, setGameStatus }) {
+export default function MineField({ option, gameStatus, setGameStatus, resetMine }) {
     const boxObject = {
         minesNearby: 0,
         mineExist: false,
@@ -113,7 +113,7 @@ export default function MineField({ option, gameStatus, setGameStatus }) {
             let existingBox = mineFieldArray[pos[0]][pos[1]];
             array = [
                 ...array.slice(0, pos[0]),
-                [...array[pos[0]].slice(0, pos[1]), { ...existingBox, stepped: true }, ...array[pos[0]].slice(pos[1] + 1)],
+                [...array[pos[0]].slice(0, pos[1]), { ...existingBox, stepped: true , flagged: false}, ...array[pos[0]].slice(pos[1] + 1)],
                 ...array.slice(pos[0] + 1)
             ]
         })
@@ -139,14 +139,31 @@ export default function MineField({ option, gameStatus, setGameStatus }) {
         if(gameStatus=='game-over-lost'){
             handleGameOver()
         }
-        console.log(numOfStepped,49-minePosArray.length)
         if(numOfStepped==(49-minePosArray.length)){
             setGameStatus('game-over-won')
+            handleGameOver()
         }
     },[gameStatus,numOfStepped])
 
+    useEffect(()=>{
+        let array = new Array(7).fill(new Array(7).fill(boxObject));
+        let neighbourArray = [];
+        const minePosArray = createMinePosArray()
+        minePosArray.map((minePos) => {
+            array = insertElement('mine', array, ...minePos)
+            neighbourArray.push(...getNeighbours(...minePos))
+        })
+        neighbourArray.map((pos) => {
+            array = insertElement('mines-nearby', array, ...pos);
+        })
+        setMineFieldArray(array);
+        setMinePosArray(minePosArray);
+        setGameStatus('started');
+        setNumOfStepped(0)
+    },[resetMine])
+
     return (
-        <div style={{pointerEvents:`${gameStatus!='started'?'none':null}`}}>
+        <div className='mine-field'>
             {
                 mineFieldArray.map(
                     (mineFieldArrayRow, i) =>
