@@ -1,5 +1,8 @@
 import React from 'react';
-import { useRoutes, A } from "hookrouter";
+
+import {
+    Link
+} from "react-router-dom";
 
 export default function Popup({ gameStatus, handleReplay }) {
     return (
@@ -8,10 +11,10 @@ export default function Popup({ gameStatus, handleReplay }) {
                 gameStatus == 'game-over-lost' ? 'Game Over' : 'Won'
             }
             <div className='popup-buttons'>
-                <A href="/" style={{ height: '100px' }}>
-                    <button className='w3-button w3-ripple'>Exit</button>
-                </A>
-                <button className='w3-button w3-ripple' onClick={()=>handleReplay()}>replay</button>
+                <Link to='/'>
+                    <button className='w3-margin w3-round-xlarge w3-button w3-ripple'>Exit</button>
+                </Link>
+                <button className='w3-margin w3-round-xlarge w3-button w3-ripple' onClick={() => handleReplay()}>replay</button>
             </div>
         </div>
     )

@@ -31,9 +31,8 @@
   div:nth-child(1){
     font-size: clamp(50px, 10vw, 120px);
   }
-  a{
+  button{
     font-size: clamp(20px, 4vw, 30px);
-    border: black 3px solid;
     margin: auto;
     width: fit-content;
     border-radius: 20px;
