@@ -8,7 +8,7 @@ export default function Popup({ gameStatus, handleReplay }) {
     return (
         <div className={`popup ${gameStatus}`}>
             {
-                gameStatus == 'game-over-lost' ? 'Game Over' : 'Won'
+                gameStatus === 'game-over-lost' ? 'Game Over' : 'Won'
             }
             <div className='popup-buttons'>
                 <Link to='/'>
