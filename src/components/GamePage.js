@@ -1,11 +1,13 @@
 import React, { useState } from 'react'
 import MineField from './MineField';
 import {
-    Link
+    Link,
+    useParams,
 } from "react-router-dom";
 import Popup from './Popup';
 import MoveSelector from './MoveSelector';
 import Navbar from './Navbar';
+import { useTour } from '@reactour/tour';
 
 export default function GamePage() {
     const [option, setOption] = useState('step');
@@ -16,10 +18,24 @@ export default function GamePage() {
         setResetMine(!resetMine);
     }
 
+    const findLevel = {
+        '5X5': 5,
+        '7X7': 7,
+        '9X9': 9,
+        'tutorial': 'tutorial'
+    }
+
+    const { level } = useParams();
+
+    const { setIsOpen } = useTour()
+    if (findLevel[level] == 'tutorial') {
+        setIsOpen(true)
+    }
+
     return (
         <div className='game-page'>
             <div className='w3-hide-large w3-hide-medium'>
-                <Navbar/>
+                <Navbar />
             </div>
             {
                 gameStatus !== 'started' && <Popup gameStatus={gameStatus} handleReplay={handleReplay} />
@@ -45,9 +61,15 @@ export default function GamePage() {
                         <div className='w3-xxxlarge'>1:02</div>
                     </div>
                     <div className='w3-hide-large w3-hide-medium'>
-                        <MoveSelector/>
+                        <MoveSelector />
                     </div>
-                    <MineField option={option} gameStatus={gameStatus} setGameStatus={(status) => setGameStatus(status)} resetMine={resetMine} />
+                    <MineField
+                        option={option}
+                        gameStatus={gameStatus}
+                        setGameStatus={(status) => setGameStatus(status)}
+                        resetMine={resetMine}
+                        level={findLevel[level]}
+                    />
                 </div>
                 {/* <div className='w3-col l4 m4 s12 options'>
                     <div className='w3-col l12 m12 s6'>

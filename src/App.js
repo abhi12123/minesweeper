@@ -12,7 +12,7 @@ function App() {
   return (
       <div className="App">
         <Switch>
-          <Route exact path="/game-page">
+          <Route exact path="/game-page/:level">
             <GamePage />
           </Route>
           <Route exact path="/">
