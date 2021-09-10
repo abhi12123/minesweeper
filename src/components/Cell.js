@@ -25,7 +25,7 @@ export default function Cell({ boxContent, handleClick }) {
     return (
         <div
             className={`
-                cell w3-button w3-border w3-ripple ${cellStyle()}
+                cell w3-button  w3-ripple ${cellStyle()}
             `}
             onClick={() => { handleClick() }}
             style={stepped ? { pointerEvents: 'none' } : null}

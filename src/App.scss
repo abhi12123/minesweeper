@@ -1,21 +1,36 @@
 @import './w3.css';
-@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=ZCOOL+KuaiLe&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Urbanist:wght@300&display=swap');
+
+$primary: #435145;
+$primary-light: #DEE1BA;
+
+$primary-font-family:'ZCOOL KuaiLe', cursive;
+$secondary-font-family: 'Urbanist', sans-serif;
+
+.primary-font{
+  font-family: $primary-font-family;
+}
+
+.secondary-font{
+  font-family: $secondary-font-family;
+}
 
 *{
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  font-family: 'Roboto', sans-serif;
+  font-family: $primary-font-family;
   text-decoration: none;
 }
 
 .cell {
-  width: 9%;
-  padding-top: 8%;
+  width: clamp(10px,6vw,60px);
+  padding-top: clamp(10px,5vw,60px);
   position: relative;
-  border-radius: 10px;
   font-weight: 300%;
   display: inline-block;
+  border:1px solid #071d00;
   .cell-content{
     position: absolute;
     top: 0;
@@ -26,8 +41,20 @@
   }
 }
 
+body{
+  background: radial-gradient(84.2% 228.05% at 8.46% 20%, #D5D7BD 0%, #505724 100%);
+  height: 100vh;
+}
+
 .homepage{
   padding-top: 35vh;
+  .icons{
+    width: 500px;
+    display: flex;
+    align-items: center;
+    margin: auto;
+    justify-content: space-between;
+  }
   div:nth-child(1){
     font-size: clamp(50px, 10vw, 120px);
   }
@@ -36,13 +63,67 @@
     margin: auto;
     width: fit-content;
     border-radius: 20px;
+    background: none;
+    color: inherit;
+    border: none;
+    outline: inherit;
+    cursor: pointer;
   }
 }
 
+.hover-stroke:hover{
+  -webkit-text-stroke: 1px $primary-light;
+  transition: 0.4s;
+}
+
 .game-page{
-  margin: clamp(40px, 4vw, 60px);
+  .nav-icons{
+    border-radius: 50px;
+    display: flex;
+    justify-content: center;
+    div{
+      background-color: $primary;
+      padding: 10px;
+      width: 70px;
+      height: 70px;
+      border-radius: 50%;
+      margin: 10px;
+      text-align: center;
+      i{
+        color: white;
+        margin: auto;
+      }
+    }
+  }
+  .move-selector{
+    margin: auto;
+    width: fit-content;
+    background-color: $primary-light;
+  }
+
+  .timer{
+    *{
+      padding: 5px;
+    }
+    i{
+      color: $primary-light;
+      -webkit-text-stroke: 2px $primary;
+    }
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
   .mine-field{
-    margin-bottom: 5%;
+    // margin-bottom: 5%;
+    background-color: $primary-light;
+    width: fit-content;
+    border-radius: 20px;
+    padding: 5vw 5vw;
+    margin: auto;
+    &>div{
+      width: fit-content;
+    }
   }
   .options{
     .option{
@@ -66,11 +147,12 @@
 }
 
 .stepped{
-  background-color: rgb(219, 171, 99);
+  background-color: $primary-light;
+  border:none;
 }
 
 .unstepped{
-  background-color: rgb(66, 40, 0);
+  background-color: $primary;
 }
 
 .bomb-img{
@@ -111,4 +193,39 @@
 
 .game-over-lost{
   color: red;
+}
+
+.select-diff{
+  div:nth-of-type(1){
+    i{
+      position: absolute;
+      left: 30%;
+      top: 50px;
+    }
+    display: flex;
+    margin: auto;
+    justify-content: center;
+  }
+  text-align: center;
+  div:nth-of-type(2) div {
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+.navbar{
+  position: fixed;
+  z-index: 2;
+  .expanded{
+    background-color: $primary-light;
+    width: 100vw;
+    height: 100vh;
+    &>div{
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 90%;
+    }
+  }
 }

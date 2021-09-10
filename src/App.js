@@ -6,6 +6,7 @@ import {
   Switch,
   Route,
 } from "react-router-dom";
+import SelectDiff from './components/SelectDiff';
 
 function App() {
   return (
@@ -16,6 +17,9 @@ function App() {
           </Route>
           <Route exact path="/">
             <HomePage />
+          </Route>
+          <Route exact path="/select-difficulty">
+            <SelectDiff />
           </Route>
         </Switch>
       </div>
