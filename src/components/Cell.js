@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
-export default function Cell({ boxContent, handleClick }) {
+export default function Cell({ boxContent, handleClick, handleRightClick, xPos, yPos }) {
     const { minesNearby, mineExist, stepped, flagged } = boxContent;
     const cellStyle = () => {
         let style = ''
@@ -15,10 +15,10 @@ export default function Cell({ boxContent, handleClick }) {
     const cellContentStyle = () => {
         let style = ''
         if (mineExist && stepped) {
-            style = style.concat(' bomb-img')
+            style = style.concat(' fas fa-bomb')
         }
         if (flagged) {
-            style = style.concat(' flag-img')
+            style = style.concat(' fas fa-flag')
         }
         return style
     }
@@ -27,7 +27,8 @@ export default function Cell({ boxContent, handleClick }) {
             className={`
                 cell w3-button  w3-ripple ${cellStyle()}
             `}
-            onClick={() => { handleClick() }}
+            onClick={(e) => { handleClick(e) }}
+            onContextMenu={(e) => handleRightClick(e)}
             style={stepped ? { pointerEvents: 'none' } : null}
         >
             <span className={`cell-content ${cellContentStyle()}`}>

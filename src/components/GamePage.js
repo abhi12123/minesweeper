@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import MineField from './MineField';
 import {
     Link,
@@ -7,7 +7,7 @@ import {
 import Popup from './Popup';
 import MoveSelector from './MoveSelector';
 import Navbar from './Navbar';
-import { useTour } from '@reactour/tour';
+import Timer from './Timer';
 
 export default function GamePage() {
     const [option, setOption] = useState('step');
@@ -27,41 +27,33 @@ export default function GamePage() {
 
     const { level } = useParams();
 
-    const { setIsOpen } = useTour()
-    if (findLevel[level] == 'tutorial') {
-        setIsOpen(true)
-    }
-
     return (
         <div className='game-page'>
             <div className='w3-hide-large w3-hide-medium'>
                 <Navbar />
             </div>
-            {
+            {/* {
                 gameStatus !== 'started' && <Popup gameStatus={gameStatus} handleReplay={handleReplay} />
-            }
+            } */}
             <div className='w3-col l2 m2 s12'>
                 <div className='nav-icons w3-hide-small'>
                     <Link to="/">
-                        <div>
-                            <i class="fas fa-3x fa-home"></i>
+                        <div className='step-7'>
+                            <i class="fas fa-2x fa-home"></i>
                         </div>
                     </Link>
-                    <Link to="/">
-                        <div>
-                            <i class="fas fa-3x fa-question"></i>
+                    <Link to="/game-page/tutorial">
+                        <div className='step-8'>
+                            <i class="fas fa-2x fa-question"></i>
                         </div>
                     </Link>
                 </div>
             </div>
             <div>
                 <div className='w3-col l8 m8 s12 w3-center'>
-                    <div className='timer'>
-                        <i class="fas fa-6x fa-stopwatch"></i>
-                        <div className='w3-xxxlarge'>1:02</div>
-                    </div>
+                    <Timer />
                     <div className='w3-hide-large w3-hide-medium'>
-                        <MoveSelector />
+                        <MoveSelector option={option} setOption={(newOption) => setOption(newOption)} />
                     </div>
                     <MineField
                         option={option}
@@ -87,7 +79,7 @@ export default function GamePage() {
                 </div> */}
             </div>
             <div className='w3-col l2 m2 s12 w3-hide-small'>
-                <MoveSelector />
+                <MoveSelector option={option} setOption={(newOption) => setOption(newOption)} />
             </div>
         </div>
     )

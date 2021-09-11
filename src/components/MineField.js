@@ -65,16 +65,20 @@ export default function MineField({ option, gameStatus, setGameStatus, resetMine
         }
     }
 
-    const handleClick = (x, y) => {
+    const handleClick = (x, y, e) => {
         option === 'step' && setMineFieldArray(stepOnBox(x, y))
         option === 'flag' && setMineFieldArray(flagBox(x, y))
+    }
+
+    const handleRightClick = (x,y,e) => {
+        e.preventDefault()
+        setMineFieldArray(flagBox(x, y))
     }
 
     const stepOnBox = (x, y) => {
         if (mineFieldArray[x][y].flagged || mineFieldArray[x][y].stepped === true) return mineFieldArray;
         if (mineFieldArray[x][y].mineExist) {
             setGameStatus('game-over-lost');
-
         }
         let arrayToStep = [];
         arrayToStep.push([x, y])
@@ -174,7 +178,8 @@ export default function MineField({ option, gameStatus, setGameStatus, resetMine
                         <div>
                             {
                                 mineFieldArrayRow.map((boxContent, j) =>
-                                    <Cell boxContent={boxContent} xPos={i} yPos={j} handleClick={() => handleClick(i, j)} />)
+                                    <Cell boxContent={boxContent} xPos={i} yPos={j} handleClick={(e) => handleClick(i, j, e)} 
+                                    handleRightClick ={(e) => handleRightClick(i,j,e) } />)
                             }
                         </div>
                 )

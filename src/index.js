@@ -5,16 +5,12 @@ import reportWebVitals from './reportWebVitals';
 import {
   HashRouter as Router
 } from "react-router-dom";
-import { TourProvider } from '@reactour/tour'
-import { steps } from './utils/steps';
 
 
 ReactDOM.render(
-  <TourProvider steps={steps}>
     <Router>
       <App />
-    </Router>
-  </TourProvider>,
+    </Router>,
   document.getElementById('root')
 );
 

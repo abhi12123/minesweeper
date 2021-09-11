@@ -25,13 +25,16 @@ $secondary-font-family: 'Urbanist', sans-serif;
 }
 
 .cell {
-  width: clamp(10px,6vw,60px);
-  padding-top: clamp(10px,5vw,60px);
+  width: clamp(10px,6vw,50px);
+  padding-top: clamp(10px,5vw,50px);
   position: relative;
   font-weight: 300%;
   display: inline-block;
   border:1px solid #071d00;
+  border-radius: 6px;
+  margin: 2px;
   .cell-content{
+    padding: 20%;
     position: absolute;
     top: 0;
     left: 0;
@@ -47,13 +50,23 @@ body{
 }
 
 .homepage{
-  padding-top: 35vh;
+  padding-top: clamp(50px,10vw,150px);
+  // position: relative;
   .icons{
-    width: 500px;
+    width: clamp(200px,20%,300px);
     display: flex;
     align-items: center;
-    margin: auto;
     justify-content: space-between;
+    position: absolute;
+    bottom: 100px;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  .footer-text{
+    position: absolute;
+    bottom: 50px;
+    left: 50%;
+    transform: translateX(-50%);
   }
   div:nth-child(1){
     font-size: clamp(50px, 10vw, 120px);
@@ -68,80 +81,32 @@ body{
     border: none;
     outline: inherit;
     cursor: pointer;
+    margin: 10px;
+    transition: 0.3s;
   }
 }
 
-.hover-stroke:hover{
-  -webkit-text-stroke: 1px $primary-light;
-  transition: 0.4s;
+.cursor-pointer{
+  cursor: pointer;
+}
+
+.hover-zoom:hover{
+  transform: scale(1.3);
+  transition: 0.5s;
 }
 
 .game-page{
-  .nav-icons{
-    border-radius: 50px;
-    display: flex;
-    justify-content: center;
-    div{
-      background-color: $primary;
-      padding: 10px;
-      width: 70px;
-      height: 70px;
-      border-radius: 50%;
-      margin: 10px;
-      text-align: center;
-      i{
-        color: white;
-        margin: auto;
-      }
-    }
-  }
-  .move-selector{
-    margin: auto;
-    width: fit-content;
-    background-color: $primary-light;
-  }
-
-  .timer{
-    *{
-      padding: 5px;
-    }
-    i{
-      color: $primary-light;
-      -webkit-text-stroke: 2px $primary;
-    }
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
+  padding-top: 30px;
   .mine-field{
-    // margin-bottom: 5%;
+    margin-top: 30px;
     background-color: $primary-light;
     width: fit-content;
     border-radius: 20px;
     padding: 5vw 5vw;
     margin: auto;
+    margin-top: 30px;
     &>div{
       width: fit-content;
-    }
-  }
-  .options{
-    .option{
-      font-size: clamp(20px, 4vw, 40px);
-      margin: auto;
-      width: 90%;
-      margin: 2%;
-      border-radius: 20px;
-      outline: none;
-      border:0px;
-      padding: 10px;
-    }
-    .selected{
-      background-color:  rgb(66, 40, 0);
-      color: white;
-    }
-    .option:hover{
-      background-color: rgba(66, 40, 0, 0.582);
     }
   }
 }
@@ -153,6 +118,7 @@ body{
 
 .unstepped{
   background-color: $primary;
+  color: white;
 }
 
 .bomb-img{
@@ -196,17 +162,32 @@ body{
 }
 
 .select-diff{
-  div:nth-of-type(1){
-    i{
-      position: absolute;
-      left: 30%;
-      top: 50px;
-    }
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 70vh;
+  width: fit-content;
+  margin: auto;
+  *{
+    transition: 0.3s;
+  }
+  div:nth-of-type(1)~i{
     display: flex;
     margin: auto;
     justify-content: center;
   }
+  div:nth-of-type(1) i{
+    position: absolute;
+    top: 50px;
+    left: 50px;
+  }
   text-align: center;
+  div:nth-of-type(2){
+    i{
+      position: absolute;
+      transform: translate(-250%,30%);
+    }
+  }
   div:nth-of-type(2) div {
     display: flex;
     flex-direction: column;
@@ -216,6 +197,11 @@ body{
 .navbar{
   position: fixed;
   z-index: 2;
+  width: 100%;
+  top: 0;
+  i{
+    margin:30px;
+  }
   .expanded{
     background-color: $primary-light;
     width: 100vw;
@@ -225,7 +211,84 @@ body{
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      height: 90%;
+      height: 70%;
     }
   }
+}
+
+.how-to-overlay{
+  margin: clamp(20px,10vw,130px);
+  margin-top: clamp(20px,10vw,60px);
+  position: relative;
+  .mine-field>div{
+    width: fit-content;
+    margin: auto;
+  }
+  .step-text{
+    margin: 30px;
+    text-align: center;
+  }
+  .step{
+    background:radial-gradient(84.2% 228.05% at 8.46% 20%, #ffffff 0%, #e5e7dc 100%);
+    border-radius: 20px;
+    padding-top: 50px;
+    .close-btn{
+      position: absolute;
+      top: 10px;
+      right: 10px;
+    }
+  }
+}
+
+.selected{
+  background-color: $primary !important;
+}
+
+.unselected{
+  background-color: $primary-light !important;
+  cursor: pointer;
+}
+
+.move-selector{
+  margin: auto;
+  width: fit-content;
+  background-color: $primary-light;
+}
+
+.nav-icons{
+  border-radius: 50px;
+  display: flex;
+  justify-content: center;
+  div{
+    background-color: none;
+    padding: 10px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin: 10px;
+    text-align: center;
+    background-color: $primary;
+    i{
+      color: white;
+      margin: auto;
+    }
+  }
+}
+
+.timer{
+  *{
+    padding: 5px;
+  }
+  i{
+    color: $primary-light;
+    -webkit-text-stroke: 2px $primary;
+  }
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.lottie-container{
+  width: 40%;
+  margin: auto;
 }
