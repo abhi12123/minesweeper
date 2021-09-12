@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/minesweeper/static/css/main.40826f56.chunk.css",
+    "main.css": "/minesweeper/static/css/main.5428a958.chunk.css",
     "main.js": "/minesweeper/static/js/main.927030f5.chunk.js",
     "main.js.map": "/minesweeper/static/js/main.927030f5.chunk.js.map",
     "runtime-main.js": "/minesweeper/static/js/runtime-main.5f2def56.js",
@@ -12,7 +12,7 @@
     "static/js/3.782cdb3c.chunk.js.map": "/minesweeper/static/js/3.782cdb3c.chunk.js.map",
     "index.html": "/minesweeper/index.html",
     "static/css/2.5e10a1e4.chunk.css.map": "/minesweeper/static/css/2.5e10a1e4.chunk.css.map",
-    "static/css/main.40826f56.chunk.css.map": "/minesweeper/static/css/main.40826f56.chunk.css.map",
+    "static/css/main.5428a958.chunk.css.map": "/minesweeper/static/css/main.5428a958.chunk.css.map",
     "static/js/2.3634bf84.chunk.js.LICENSE.txt": "/minesweeper/static/js/2.3634bf84.chunk.js.LICENSE.txt",
     "static/media/App.scss": "/minesweeper/static/media/bomb-img.d305da6d.png",
     "static/media/slick-theme.css": "/minesweeper/static/media/slick.c94f7671.ttf"
@@ -21,7 +21,7 @@
     "static/js/runtime-main.5f2def56.js",
     "static/css/2.5e10a1e4.chunk.css",
     "static/js/2.3634bf84.chunk.js",
-    "static/css/main.40826f56.chunk.css",
+    "static/css/main.5428a958.chunk.css",
     "static/js/main.927030f5.chunk.js"
   ]
 }
