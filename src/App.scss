@@ -40,7 +40,7 @@ $secondary-font-family: 'Urbanist', sans-serif;
     left: 0;
     bottom: 0;
     right: 0;
-    font-size: clamp(10px,4vw,30px);
+    font-size: clamp(10px,4vw,20px);
   }
 }
 
@@ -114,7 +114,7 @@ body{
 
 .stepped{
   background-color: $primary-light;
-  border:1px solid transparent;
+  border:1px dashed $primary-light;
 }
 
 .unstepped{
