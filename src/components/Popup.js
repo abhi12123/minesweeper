@@ -8,7 +8,7 @@ export default function Popup({ gameStatus, handleReplay, timeSpent }) {
     return (
         <div className={`popup ${gameStatus}`}>
             {
-                gameStatus === 'game-over-lost' ? <p className=' secondary-font'>💀Game Over💀<br/>Time Spent : {timeSpent}</p> : <p className=' secondary-font'>🎉Conrats! You Won🎉<br/>Time Spent : {timeSpent}</p>
+                gameStatus === 'game-over-lost' ? <p className=' secondary-font'>💀Game Over💀<br/>Time Spent : {timeSpent}</p> : <p className=' secondary-font'>🎉Congrats! You Won🎉<br/>Time Spent : {timeSpent}</p>
             }
             <div className='popup-buttons'>
                 <Link to='/'>
