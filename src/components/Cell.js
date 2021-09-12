@@ -25,13 +25,13 @@ export default function Cell({ boxContent, handleClick, handleRightClick, xPos, 
     return (
         <div
             className={`
-                cell  w3-ripple ${cellStyle()}
+                cell secondary-font ${cellStyle()}
             `}
             onClick={(e) => { handleClick(e) }}
             onContextMenu={(e) => handleRightClick(e)}
             style={stepped ? { pointerEvents: 'none' } : null}
         >
-            <span className={`cell-content secondary-font ${cellContentStyle()}`}>
+            <span className={`cell-content ${cellContentStyle()}`}>
                 {minesNearby === 0 || !stepped || mineExist ? null : minesNearby}
             </span>
         </div>
