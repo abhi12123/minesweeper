@@ -25,12 +25,12 @@ $secondary-font-family: 'Urbanist', sans-serif;
 }
 
 .cell {
-  width: clamp(10px,6vw,50px);
-  padding-top: clamp(10px,5vw,50px);
+  /* width: clamp(10px, 6vw, 50px); */
+  padding: clamp(10px, 3vw, 20px);
   position: relative;
   font-weight: 300%;
   display: inline-block;
-  border:1px solid #071d00;
+  border: 1px solid #071d00;
   border-radius: 6px;
   margin: 2px;
   .cell-content{
@@ -40,7 +40,7 @@ $secondary-font-family: 'Urbanist', sans-serif;
     left: 0;
     bottom: 0;
     right: 0;
-    font-size: clamp(20px,4vw,30px);
+    font-size: clamp(10px,4vw,30px);
   }
 }
 
@@ -69,7 +69,7 @@ body{
     transform: translateX(-50%);
   }
   div:nth-child(1){
-    font-size: clamp(50px, 10vw, 120px);
+    font-size: clamp(35px, 10vw, 120px);
   }
   button{
     font-size: clamp(20px, 4vw, 30px);
@@ -107,13 +107,14 @@ body{
     margin-top: 30px;
     &>div{
       width: fit-content;
+      display: flex;
     }
   }
 }
 
 .stepped{
   background-color: $primary-light;
-  border:none;
+  border:1px solid transparent;
 }
 
 .unstepped{
