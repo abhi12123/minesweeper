@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Cell from './Cell';
 
-export default function MineField({ option, gameStatus, setGameStatus, resetMine }) {
+export default function MineField({ option, gameStatus, setGameStatus, resetMine, level }) {
     const boxObject = {
         minesNearby: 0,
         mineExist: false,
@@ -9,17 +9,20 @@ export default function MineField({ option, gameStatus, setGameStatus, resetMine
         flagged: false
     }
 
-    const [mineFieldArray, setMineFieldArray] = useState(new Array(7).fill(new Array(7).fill(boxObject)));
+    const selectedLevel = level=='tutorial'?7:level;
+
+    const [mineFieldArray, setMineFieldArray] = useState(new Array(selectedLevel).fill(new Array(selectedLevel).fill(boxObject)));
     const [minePosArray, setMinePosArray] = useState([]);
     const [numOfStepped, setNumOfStepped] = useState(0);
 
     const getRandomCombination = () => {
-        return Math.floor(Math.random() * 7)
+        return Math.floor(Math.random() * selectedLevel)
     }
 
     const createMinePosArray = () => {
         let minePosArray = [];
-        for (let i = 0; i < 5; i++) {
+        const numOfMines = Math.floor(selectedLevel * 75/100)
+        for (let i = 0; i < numOfMines; i++) {
             const minePos = [getRandomCombination(), getRandomCombination()];
             minePosArray.push(minePos)
         }
@@ -33,7 +36,7 @@ export default function MineField({ option, gameStatus, setGameStatus, resetMine
         let returnArray = []
         arr1.map((el1) => {
             arr2.map((el2) => {
-                if ((el1 === x && el2 === y) || el1 < 0 || el2 < 0 || el1 > 6 || el2 > 6) {
+                if ((el1 === x && el2 === y) || el1 < 0 || el2 < 0 || el1 > selectedLevel-1 || el2 > selectedLevel-1) {
                 } else {
                     returnArray.push([el1, el2])
                 }
@@ -61,16 +64,20 @@ export default function MineField({ option, gameStatus, setGameStatus, resetMine
         }
     }
 
-    const handleClick = (x, y) => {
+    const handleClick = (x, y, e) => {
         option === 'step' && setMineFieldArray(stepOnBox(x, y))
         option === 'flag' && setMineFieldArray(flagBox(x, y))
+    }
+
+    const handleRightClick = (x,y,e) => {
+        e.preventDefault()
+        setMineFieldArray(flagBox(x, y))
     }
 
     const stepOnBox = (x, y) => {
         if (mineFieldArray[x][y].flagged || mineFieldArray[x][y].stepped === true) return mineFieldArray;
         if (mineFieldArray[x][y].mineExist) {
             setGameStatus('game-over-lost');
-
         }
         let arrayToStep = [];
         arrayToStep.push([x, y])
@@ -139,14 +146,14 @@ export default function MineField({ option, gameStatus, setGameStatus, resetMine
         if (gameStatus == 'game-over-lost') {
             handleGameOver()
         }
-        if (numOfStepped == (49 - minePosArray.length)) {
+        if (numOfStepped == (selectedLevel*selectedLevel - minePosArray.length)) {
             setGameStatus('game-over-won')
             handleGameOver()
         }
     }, [gameStatus, numOfStepped])
 
     useEffect(() => {
-        let array = new Array(7).fill(new Array(7).fill(boxObject));
+        let array = new Array(selectedLevel).fill(new Array(selectedLevel).fill(boxObject));
         let neighbourArray = [];
         const minePosArray = createMinePosArray()
         minePosArray.map((minePos) => {
@@ -170,7 +177,8 @@ export default function MineField({ option, gameStatus, setGameStatus, resetMine
                         <div>
                             {
                                 mineFieldArrayRow.map((boxContent, j) =>
-                                    <Cell boxContent={boxContent} xPos={i} yPos={j} handleClick={() => handleClick(i, j)} />)
+                                    <Cell boxContent={boxContent} xPos={i} yPos={j} handleClick={(e) => handleClick(i, j, e)} 
+                                    handleRightClick ={(e) => handleRightClick(i,j,e) } />)
                             }
                         </div>
                 )
