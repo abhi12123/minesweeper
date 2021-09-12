@@ -10,7 +10,6 @@ export default function MineField({ option, gameStatus, setGameStatus, resetMine
     }
 
     const selectedLevel = level=='tutorial'?7:level;
-    const tutorial = level == 'tutorial';
 
     const [mineFieldArray, setMineFieldArray] = useState(new Array(selectedLevel).fill(new Array(selectedLevel).fill(boxObject)));
     const [minePosArray, setMinePosArray] = useState([]);

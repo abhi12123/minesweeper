@@ -136,29 +136,17 @@ body{
 }
 
 .popup{
-  background: #ffffffe5;
-  width: 80%;
+  background:radial-gradient(84.2% 228.05% at 8.46% 20%, #ffffff 0%, #e5e7dc 100%);
+  width: 200px;
   position: absolute;
-  height: clamp(150px, 30vw, 300px);
-  top: 50%;
+  top: 40%;
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: 3;
   border-radius: 20px;
-  box-shadow: 1px 1px 10px #0000008a;
-  font-size: clamp(50px, 10vw, 120px);
+  box-shadow: 1px 1px 1000px 1000px #00000096;
   text-align: center;
-  .popup-buttons{
-    font-size: clamp(30px, 4vw, 50px);
-  }
-}
-
-.game-over-won{
-  color: green;
-}
-
-.game-over-lost{
-  color: red;
+  padding-top: 10px;
 }
 
 .select-diff{
@@ -291,4 +279,8 @@ body{
 .lottie-container{
   width: 40%;
   margin: auto;
+}
+.confetti-container{
+  position: fixed;
+  // height: 100%;
 }

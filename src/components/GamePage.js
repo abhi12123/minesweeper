@@ -8,14 +8,23 @@ import Popup from './Popup';
 import MoveSelector from './MoveSelector';
 import Navbar from './Navbar';
 import Timer from './Timer';
+import Confetti from './Confetti';
 
 export default function GamePage() {
     const [option, setOption] = useState('step');
     const [gameStatus, setGameStatus] = useState('started');
-    const [resetMine, setResetMine] = useState(false)
+    const [resetMine, setResetMine] = useState(false);
+    const [timeSpent,setTimeSpent] = useState('00:00')
 
     const handleReplay = () => {
         setResetMine(!resetMine);
+    }
+
+    const handlePopUp = () => {
+            return <>
+            {gameStatus != 'game-over-lost' && <Confetti />}
+            <Popup gameStatus={gameStatus} handleReplay={handleReplay} timeSpent={timeSpent}/>
+            </> 
     }
 
     const findLevel = {
@@ -32,9 +41,9 @@ export default function GamePage() {
             <div className='w3-hide-large w3-hide-medium'>
                 <Navbar />
             </div>
-            {/* {
-                gameStatus !== 'started' && <Popup gameStatus={gameStatus} handleReplay={handleReplay} />
-            } */}
+            {
+                gameStatus !== 'started' && handlePopUp()
+            }
             <div className='w3-col l2 m2 s12'>
                 <div className='nav-icons w3-hide-small'>
                     <Link to="/">
@@ -42,16 +51,16 @@ export default function GamePage() {
                             <i class="fas fa-2x fa-home"></i>
                         </div>
                     </Link>
-                    <Link to="/game-page/tutorial">
+                    <Link to="/how-to-play">
                         <div className='step-8'>
                             <i class="fas fa-2x fa-question"></i>
                         </div>
                     </Link>
                 </div>
             </div>
-            <div>
+            <div style={{pointerEvents: `${gameStatus === 'game-over-lost' ? 'none' : 'inherit'}`}}>
                 <div className='w3-col l8 m8 s12 w3-center'>
-                    <Timer />
+                    <Timer setTimeSpent={(time)=>setTimeSpent(time)} gameOver={gameStatus !== 'started'}/>
                     <div className='w3-hide-large w3-hide-medium'>
                         <MoveSelector option={option} setOption={(newOption) => setOption(newOption)} />
                     </div>

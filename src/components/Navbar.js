@@ -20,7 +20,7 @@ export default function Navbar() {
                                     Home
                                 </div>
                             </Link>
-                            <Link to="/">
+                            <Link to="/how-to-play">
                                 <div className='secondary-font w3-xxlarge'>
                                     How to Play
                                 </div>
