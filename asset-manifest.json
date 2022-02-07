@@ -1,27 +1,23 @@
 {
   "files": {
-    "main.css": "/minesweeper/static/css/main.5428a958.chunk.css",
-    "main.js": "/minesweeper/static/js/main.131e699e.chunk.js",
-    "main.js.map": "/minesweeper/static/js/main.131e699e.chunk.js.map",
-    "runtime-main.js": "/minesweeper/static/js/runtime-main.5f2def56.js",
-    "runtime-main.js.map": "/minesweeper/static/js/runtime-main.5f2def56.js.map",
-    "static/css/2.5e10a1e4.chunk.css": "/minesweeper/static/css/2.5e10a1e4.chunk.css",
-    "static/js/2.3634bf84.chunk.js": "/minesweeper/static/js/2.3634bf84.chunk.js",
-    "static/js/2.3634bf84.chunk.js.map": "/minesweeper/static/js/2.3634bf84.chunk.js.map",
-    "static/js/3.782cdb3c.chunk.js": "/minesweeper/static/js/3.782cdb3c.chunk.js",
-    "static/js/3.782cdb3c.chunk.js.map": "/minesweeper/static/js/3.782cdb3c.chunk.js.map",
-    "index.html": "/minesweeper/index.html",
-    "static/css/2.5e10a1e4.chunk.css.map": "/minesweeper/static/css/2.5e10a1e4.chunk.css.map",
-    "static/css/main.5428a958.chunk.css.map": "/minesweeper/static/css/main.5428a958.chunk.css.map",
-    "static/js/2.3634bf84.chunk.js.LICENSE.txt": "/minesweeper/static/js/2.3634bf84.chunk.js.LICENSE.txt",
-    "static/media/App.scss": "/minesweeper/static/media/bomb-img.d305da6d.png",
-    "static/media/slick-theme.css": "/minesweeper/static/media/slick.c94f7671.ttf"
+    "main.css": "/static/css/main.9edd49b3.chunk.css",
+    "main.js": "/static/js/main.bb52ab9c.chunk.js",
+    "main.js.map": "/static/js/main.bb52ab9c.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.70c4a657.js",
+    "runtime-main.js.map": "/static/js/runtime-main.70c4a657.js.map",
+    "static/js/2.e67136cc.chunk.js": "/static/js/2.e67136cc.chunk.js",
+    "static/js/2.e67136cc.chunk.js.map": "/static/js/2.e67136cc.chunk.js.map",
+    "static/js/3.6c2a557e.chunk.js": "/static/js/3.6c2a557e.chunk.js",
+    "static/js/3.6c2a557e.chunk.js.map": "/static/js/3.6c2a557e.chunk.js.map",
+    "index.html": "/index.html",
+    "static/css/main.9edd49b3.chunk.css.map": "/static/css/main.9edd49b3.chunk.css.map",
+    "static/js/2.e67136cc.chunk.js.LICENSE.txt": "/static/js/2.e67136cc.chunk.js.LICENSE.txt",
+    "static/media/App.scss": "/static/media/bomb-img.d305da6d.png"
   },
   "entrypoints": [
-    "static/js/runtime-main.5f2def56.js",
-    "static/css/2.5e10a1e4.chunk.css",
-    "static/js/2.3634bf84.chunk.js",
-    "static/css/main.5428a958.chunk.css",
-    "static/js/main.131e699e.chunk.js"
+    "static/js/runtime-main.70c4a657.js",
+    "static/js/2.e67136cc.chunk.js",
+    "static/css/main.9edd49b3.chunk.css",
+    "static/js/main.bb52ab9c.chunk.js"
   ]
 }
